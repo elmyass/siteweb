@@ -1,0 +1,211 @@
+.product-slider {
+  overflow: hidden;
+  background-color: white;
+  width: 100vw;
+  position: 3000px;
+  margin-bottom: 10px;
+}
+
+.slider-wrapper {
+  display: flex;
+  animation: slide 20s linear infinite;
+  will-change: transform; /* Optimize performance */
+}
+
+.slider-image {
+  width: 400px;
+  height: 400px;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden; /* To ensure the overlay text stays within the image bounds */
+}
+
+.slider-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease; /* Smooth transition for hover effect */
+  padding: 20px;
+  text-align: center;
+}
+
+.slider-image:hover .overlay-text {
+  opacity: 1; /* Show the overlay text on hover */
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-200px * 8)); /* Adjust this based on the number of images */
+  }
+}
+
+.no-transition {
+  transition: none !important; /* Disable transition for instant reset */
+}
+
+.slider-wrapper:hover {
+  animation-play-state: paused;
+}
+
+/* Existing styles for the product cards, filter, etc. */
+.filter-section {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.filter-icon {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #333;
+  font-size: 14px;
+}
+
+.filter-options {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.filter-options span {
+  display: block;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: #333;
+}
+
+.filter-options span:hover {
+  background-color: #f0f0f0;
+}
+
+.product-card-container {
+  padding-top: 1rem;
+  display: flex;
+  gap: 0.8rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  transition: all 1.5s ease;
+}
+
+.product-card {
+  width: 20%;
+  border-radius: 8px;
+  box-shadow: 0 7px 25px -10px rgba(0,0,0,0.33);
+  overflow: hidden;
+  position: relative;
+}
+
+.product-card, .product-card * {
+  transition: all 0.5s ease;
+  text-decoration: none;
+}
+
+.product-card:hover {
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.25);  
+  transform: translateY(-3px);
+}
+
+.product-card .product-card-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.product-card:hover .product-card-img {
+  height: 240px;
+}
+
+.product-card:hover .product-card-details {
+  padding-bottom: 72px;
+}
+
+.product-card .product-card-details {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  background: linear-gradient(rgba(0,0,0,0.025), transparent);
+}
+
+.product-card .product-card-details .product-name {
+  font-size: 18px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 500;
+  color: #555555;
+}
+
+.product-card .product-card-details .product-price {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  color: #000;
+}
+
+.product-card .product-wish-addtocart {
+  position: absolute;
+  bottom: -75px;
+  right: 0;
+  left: 0;
+  justify-content: center; /* Center text horizontally */
+  align-items: center;
+  border-radius: 32px 0 0 32px!
+}
+
+.product-card:hover .product-wish-addtocart {
+  bottom: 1.1rem;
+}
+
+.product-card .product-wish-addtocart {
+  display: flex;
+  justify-content: space-between;
+}
+
+.product-card .product-wish-addtocart .addtocart-btn {
+  border-radius: 32px 0 0 32px!important;
+  width: 162px;
+  background: grey;
+  color: white;
+}
+
+.product-card .product-wish-addtocart .view-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: .3rem .3rem;
+  background-color: #eee;
+  color: #bbbbbb;
+  box-shadow: none;
+  border-radius: 100px!important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.addtocart-btn:hover, .view-btn:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}

@@ -1,0 +1,53 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f5e6dc; 
+  border-bottom: 1px solid #eaeaea;
+  position: sticky; /* Make the header sticky */
+  top: 0; /* Stick the header to the top of the page */
+  z-index: 1000; 
+}
+
+.logo {
+  flex: 1;
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.admin-link,
+.cart-link {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.search-bar button {
+  padding: 5px 10px;
+  background-color: #ce5606;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

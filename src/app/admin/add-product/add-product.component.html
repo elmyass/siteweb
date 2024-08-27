@@ -1,0 +1,69 @@
+<div class="uk-container">
+  <div uk-grid>
+    <div class="uk-width-1-2">
+      <div class='uk-width-1-1@s'>
+        <h2 class="uk-text-center">Main Image</h2>
+        <div id="media-uploader1" name="media-uploader1">
+          <div class="dz-message">
+            <span><i class="fa fa-file"></i></span> Drag and drop an image here or click to upload.
+          </div>
+          <input type="file" (change)="onMainImageSelected($event)" class="uk-input" autocomplete="off">
+        </div>
+      </div>
+      <div class='uk-width-1-1@s'>
+        <h2 class="uk-text-center">Gallery Images</h2>
+        <div id="media-uploader1" name="media-uploader1">
+          <div class="dz-message">
+            <span><i class="fa fa-file"></i></span> Drag and drop images here or click to upload.
+          </div>
+          <input type="file" (change)="onGalleryImagesSelected($event)" multiple class="uk-input" autocomplete="off">
+        </div>
+      </div>
+    </div>
+
+    <div class="uk-width-1-2">
+      <div class='uk-width-1-1@s'>
+        <h2 class="uk-text-center">Product Details</h2>
+        <hr />
+        <form [formGroup]="form">
+          
+          <div class="uk-margin">
+            <label class="uk-form-label" for="name">Product Name</label>
+            <div class="uk-form-controls">
+              <input formControlName="name" class="uk-input" id="name" type="text" placeholder="Product Name" autocomplete="name">
+            </div>
+          </div>
+          <div class="uk-margin">
+            <label class="uk-form-label" for="id">Product ID</label>
+            <div class="uk-form-controls">
+              <input formControlName="id" class="uk-input" id="id" type="text" placeholder="Product ID" autocomplete="off">
+            </div>
+          </div>
+          <div class="uk-margin">
+            <label class="uk-form-label" for="price">Price</label>
+            <div class="uk-form-controls">
+              <input formControlName="price" class="uk-input" id="price" type="number" placeholder="Price" autocomplete="off">
+            </div>
+          </div>
+          <div class="uk-margin">
+            <label class="uk-form-label" for="description">Description</label>
+            <div class="uk-form-controls">
+              <textarea formControlName="description" class="uk-textarea" id="description" placeholder="Description" autocomplete="off"></textarea>
+            </div>
+          </div>
+          <div class="uk-margin">
+            <label class="uk-form-label" for="categoryQuality">Category</label>
+            <div class="uk-form-controls">
+              <select formControlName="categoryQuality" class="uk-select" id="categoryQuality" autocomplete="off">
+                <option value="LOW">Low</option>
+                <option value="MEDIUM">Medium</option>
+                <option value="HIGH">High</option>
+              </select>
+            </div>
+          </div>
+          <button class="uk-button uk-button-primary" (click)="addProduct()">Add Product</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

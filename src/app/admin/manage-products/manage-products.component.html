@@ -1,0 +1,27 @@
+<div class="manage-products">
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Image</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of products">
+        <td>{{ product.name }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price | currency:'USD':'symbol':'1.0-0' }}</td>
+        <td>{{ product.categoryQuality }}</td>
+        <td><img [src]="product.imageUrl" alt="{{ product.name }}" style="width: 50px; height: auto;" /></td>
+        <td>
+          <button (click)="onUpdate(product)">Update</button>
+          <button (click)="onDelete(product.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

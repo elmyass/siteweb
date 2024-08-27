@@ -1,0 +1,47 @@
+<!-- Slider Section -->
+<!-- Slider Section -->
+<div class="product-slider">
+  <div class="slider-wrapper">
+    <div class="slider-image" *ngFor="let product of sliderProducts">
+      <img class="slider-img" [src]="product.imageUrl" alt="Slider Image" />
+      <!-- Overlay Text -->
+      <div class="overlay-text">
+        <p>{{ product.hoverText }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Filter and Product Cards Section -->
+<div class="filter-section">
+  <div class="filter-icon" (click)="toggleFilter()">
+
+   
+    <i class="fa-solid fa-filter"></i>
+  </div>
+
+  <div *ngIf="filterVisible" class="filter-options">
+    <span (click)="applyFilter('All')">All</span>
+    <span (click)="applyFilter('Low')">Low</span>
+    <span (click)="applyFilter('Medium')">Medium</span>
+    <span (click)="applyFilter('High')">High</span>
+  </div>
+</div>
+
+<div class="product-card-container">
+  <div class="product-card" *ngFor="let product of filteredProducts">
+    <a [routerLink]="['/products/details', product.id]" class="product-link">
+      <img class="product-card-img" [src]="product.imageUrl" [alt]="product.name" />
+      
+      <div class="product-card-details">
+        <span class="product-name">{{ product.name }}</span>
+        <span class="product-price">{{ product.price | currency:'USD' }}</span>
+      </div>
+    </a>
+
+    <div class="product-wish-addtocart">
+      <div class="view-btn" (click)="viewProductDetails(product)">View</div>
+      <a class="addtocart-btn" (click)="addToCart(product)">Add To Cart</a>
+    </div>
+  </div>
+</div>

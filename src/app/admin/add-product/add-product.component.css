@@ -1,0 +1,49 @@
+.uk-container {
+    margin-top: 20px;
+  }
+  
+  #media-uploader1,
+  #media-uploader2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    min-height: 150px;
+    height: 200px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    background: white;
+    display: table;
+    padding: 20px 20px;
+    cursor: pointer;
+  }
+  
+  #media-uploader1 .dz-message,
+  #media-uploader2 .dz-message {
+    font-size: 25px;
+    text-align: center;
+    color: #a0a5aa;
+    display: table-cell;
+    vertical-align: middle;
+  }
+  
+  .uk-text-center {
+    text-align: center;
+  }
+  
+  .uk-input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+  }
+  
+  .uk-button-primary {
+    background-color: #1e87f0;
+    border-color: #1e87f0;
+    color: white;
+  }
+  
+  .uk-button-primary:hover {
+    background-color: #0f7ae5;
+    border-color: #0f7ae5;
+  }
+  
+  
