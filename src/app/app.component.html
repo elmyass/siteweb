@@ -9,10 +9,18 @@
     </div>
     <div class="cart-link">
       <a [routerLink]="['/cart']"><i class="fa-solid fa-cart-shopping"></i></a>
-
     </div>
     <div class="admin-link">
       <a [routerLink]="['/admin']"><i class="fa-solid fa-gears"></i></a>
+    </div>
+    <div class="user-menu">
+      <div class="user-icon" (click)="toggleUserMenu()">
+        <i class="fa-solid fa-user"></i> {{ userName }}
+        <div *ngIf="isUserMenuOpen" class="user-menu-dropdown">
+          <p>{{ userName }}</p>
+          <a (click)="logout()">Logout</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
