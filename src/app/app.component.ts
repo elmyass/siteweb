@@ -1,9 +1,9 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { KeycloakService } from 'keycloak-angular';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { KeycloakService } from 'keycloak-angular';
 
 @Component({
   selector: 'app-root',
@@ -28,18 +28,17 @@ export class AppComponent {
   }
 
   private async initKeycloak(): Promise<void> {
-    const isLoggedIn = await this.keycloakService.isLoggedIn();
-    if (isLoggedIn) {
-      try {
-        const userProfile = await this.keycloakService.loadUserProfile();
-        this.userName = userProfile.username ?? 'Unknown User';
-        this.userEmail = userProfile.email ?? 'No Email';
-        
-      } catch (error) {
-        console.error('Failed to load user profile:', error);
+    try {
+      const isLoggedIn = await this.keycloakService.isLoggedIn();
+      if (isLoggedIn) {
+        const token = await this.keycloakService.getToken();
+        console.log('Token in AppComponent:', token);
+        this.userName = (await this.keycloakService.loadUserProfile()).username ?? 'Unknown User';
+      } else {
+        await this.keycloakService.login();
       }
-    } else {
-      console.warn('User not logged in');
+    } catch (error) {
+      console.error('Error initializing Keycloak:', error);
     }
   }
 
