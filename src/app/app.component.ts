@@ -15,7 +15,7 @@ import { KeycloakService } from 'keycloak-angular';
 export class AppComponent {
   title = 'ShopEasy';
   userName: string = '';
-  userEmail: string = '';  // Add this if you want to display the email
+  userEmail: string = '';
   isUserMenuOpen = false;
 
   constructor(
@@ -31,9 +31,10 @@ export class AppComponent {
     const isLoggedIn = await this.keycloakService.isLoggedIn();
     if (isLoggedIn) {
       try {
-        this.userName = this.keycloakService.getUsername();
         const userProfile = await this.keycloakService.loadUserProfile();
-        this.userEmail = userProfile.email || ''; // Retrieve the email from the profile
+        this.userName = userProfile.username ?? 'Unknown User';
+        this.userEmail = userProfile.email ?? 'No Email';
+        
       } catch (error) {
         console.error('Failed to load user profile:', error);
       }
