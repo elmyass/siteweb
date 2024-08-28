@@ -1,6 +1,18 @@
 <div class="header">
   <div class="logo">
-    <img src="assets/logo.svg" alt="ShopEasy Logo">
+    <svg width="300" height="80" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 80">
+      <rect width="300" height="80" fill="none"/>
+      <g transform="translate(20, 20)">
+        <!-- Detailed Shopping Cart Icon -->
+        <path d="M0 0h4l4 8h48l6-8h4l-8 20h-52l-6-20z" fill="#000000"/>
+        <circle cx="14" cy="30" r="5" fill="#000000"/>
+        <circle cx="50" cy="30" r="5" fill="#000000"/>
+        <!-- Text -->
+        <text x="90" y="30" font-family="Arial" font-size="32" font-weight="bold" fill="#000000">ShopEasy</text>
+      </g>
+    </svg>
+    
+
   </div>
   <div class="right-section">
     <div class="search-bar">
@@ -25,7 +37,6 @@
     </div>
   </div>
 </div>
-
 <div class="main-container">
   <router-outlet></router-outlet>
 </div>
