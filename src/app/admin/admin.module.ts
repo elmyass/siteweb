@@ -17,7 +17,7 @@ import { AddProductComponent } from './add-product/add-product.component';
     FormsModule,
     ReactiveFormsModule, 
     AdminRoutingModule ,
-    HttpClientModule
+   
   ]
 })
 export class AdminModule { }
