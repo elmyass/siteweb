@@ -2,21 +2,12 @@
   <div uk-grid>
     <div class="uk-width-1-2">
       <div class='uk-width-1-1@s'>
-        <h2 class="uk-text-center">Main Image</h2>
+        <h2 class="uk-text-center">Upload Image</h2>
         <div id="media-uploader1" name="media-uploader1">
           <div class="dz-message">
             <span><i class="fa fa-file"></i></span> Drag and drop an image here or click to upload.
           </div>
-          <input type="file" (change)="onMainImageSelected($event)" class="uk-input" autocomplete="off">
-        </div>
-      </div>
-      <div class='uk-width-1-1@s'>
-        <h2 class="uk-text-center">Gallery Images</h2>
-        <div id="media-uploader1" name="media-uploader1">
-          <div class="dz-message">
-            <span><i class="fa fa-file"></i></span> Drag and drop images here or click to upload.
-          </div>
-          <input type="file" (change)="onGalleryImagesSelected($event)" multiple class="uk-input" autocomplete="off">
+          <input type="file" (change)="onFileSelected($event)" class="uk-input" autocomplete="off">
         </div>
       </div>
     </div>
@@ -25,8 +16,7 @@
       <div class='uk-width-1-1@s'>
         <h2 class="uk-text-center">Product Details</h2>
         <hr />
-        <form [formGroup]="form">
-          
+        <form [formGroup]="form" (ngSubmit)="addProduct()" enctype="multipart/form-data">
           <div class="uk-margin">
             <label class="uk-form-label" for="name">Product Name</label>
             <div class="uk-form-controls">
@@ -61,7 +51,7 @@
               </select>
             </div>
           </div>
-          <button class="uk-button uk-button-primary" (click)="addProduct()">Add Product</button>
+          <button class="uk-button uk-button-primary" type="submit">Add Product</button>
         </form>
       </div>
     </div>

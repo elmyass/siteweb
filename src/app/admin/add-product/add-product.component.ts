@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environment';
@@ -8,13 +8,12 @@ import { environment } from '../../../environment';
   templateUrl: './add-product.component.html',
   styleUrls: ['./add-product.component.css']
 })
-export class AddProductComponent implements OnInit {
-
-  private apiUrl = `${environment.apiBaseUrl}/products`; 
+export class AddProductComponent {
 
   form: FormGroup;
-  mainImageFile: File | null = null;
-  galleryImagesFiles: File[] = [];
+  selectedFile: File | null = null;
+
+  private apiUrl = `${environment.apiBaseUrl}/products/upload`;
 
   constructor(private builder: FormBuilder, private http: HttpClient) { 
     this.form = this.builder.group({
@@ -22,49 +21,34 @@ export class AddProductComponent implements OnInit {
       name: ['', Validators.required],
       price: [0, [Validators.required, Validators.min(0)]],
       description: ['', Validators.required],
-      categoryQuality: ['', Validators.required],
-      imageUrl: [''] 
+      categoryQuality: ['', Validators.required]
     });
   }
 
-  ngOnInit(): void {}
-
-  onMainImageSelected(event: any): void {
-    this.mainImageFile = event.target.files[0];
-  }
-
-  onGalleryImagesSelected(event: any): void {
-    this.galleryImagesFiles = Array.from(event.target.files);
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
   }
 
   addProduct(): void {
-    if (this.form.valid) {
-      console.log("All fields are valid, proceeding with submission.");
+    if (this.form.valid && this.selectedFile) {
       const formData = new FormData();
       formData.append('id', this.form.get('id')?.value);
       formData.append('name', this.form.get('name')?.value);
-      
       formData.append('price', this.form.get('price')?.value);
       formData.append('description', this.form.get('description')?.value);
       formData.append('categoryQuality', this.form.get('categoryQuality')?.value);
-      
-      if (this.mainImageFile) {
-        formData.append('mainImage', this.mainImageFile);
-      }
-      
-      this.galleryImagesFiles.forEach((file, index) => {
-        formData.append(`galleryImages[${index}]`, file);
-      });
+      formData.append('file', this.selectedFile, this.selectedFile.name);
 
-      this.http.post<any>(`${this.apiUrl}`, formData).subscribe(() => {
-        console.log('Product added successfully');
+      this.http.post<any>(this.apiUrl, formData).subscribe(response => {
+        console.log('Product added successfully', response);
+        // Handle success, maybe reset the form or show a success message
+      }, error => {
+        console.error('Error adding product', error);
+        // Handle error, show an error message
       });
     } else {
-      console.log("Form is invalid.");
-    console.log(this.form.errors);  
-    alert('Please fill in all required fields.');
-
-      alert('Please fill in all required fields.');
+      console.log('Form is invalid or no file selected');
+      alert('Please fill in all required fields and select an image.');
     }
   }
 }
