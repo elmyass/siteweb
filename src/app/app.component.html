@@ -11,19 +11,26 @@
         <text x="90" y="30" font-family="Arial" font-size="32" font-weight="bold" fill="#000000">ShopEasy</text>
       </g>
     </svg>
-    
-
   </div>
   <div class="right-section">
     <div class="search-bar">
       <input type="text" placeholder="Search for products...">
       <button class="primary" type="button">Search</button>
     </div>
+    <div class="home-link">
+      <a [routerLink]="['/products']">
+        <i class="fa-solid fa-house"></i>
+      </a>
+    </div>
     <div class="cart-link">
-      <a [routerLink]="['/cart']"><i class="fa-solid fa-cart-shopping"></i></a>
+      <a [routerLink]="['/cart']">
+        <i class="fa-solid fa-cart-shopping"></i>
+      </a>
     </div>
     <div class="admin-link">
-      <a [routerLink]="['/admin']"><i class="fa-solid fa-gears"></i></a>
+      <a [routerLink]="['/admin']">
+        <i class="fa-solid fa-gears"></i>
+      </a>
     </div>
     <div class="user-menu">
       <div class="user-icon" (click)="toggleUserMenu()">
