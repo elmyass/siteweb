@@ -1,11 +1,8 @@
 <div class="admin-dashboard">
-    <h2>Admin Dashboard</h2>
-    <nav>
-      <a routerLink="/admin/add-product">Add New Product</a>
-
-      <br>
-      <a routerLink="/admin/manage-products">Manage Products</a>
-    </nav>
-    <router-outlet></router-outlet>
-  </div>
-  
+  <h2>Admin Dashboard</h2>
+  <nav class="admin-nav">
+    <a routerLink="/admin/add-product" class="nav-button">Add New Product</a>
+    <a routerLink="/admin/manage-products" class="nav-button">Manage Products</a>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
