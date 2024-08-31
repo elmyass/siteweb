@@ -16,7 +16,7 @@
       <tr *ngFor="let product of products">
         <td>{{ product.id }}</td>
         <td>{{ product.name }}</td>
-      
+        <td>{{ product.price | currency }}</td>
         <td>{{ product.description }}</td>
         <td>{{ product.categoryQuality }}</td>
         <td>
@@ -29,4 +29,34 @@
       </tr>
     </tbody>
   </table>
+
+  <!-- Update Product Modal -->
+  <div *ngIf="selectedProduct" class="modal">
+    <div class="modal-content">
+      <h3>Update Product</h3>
+      <form (ngSubmit)="onSubmit()">
+        <label for="name">Name:</label>
+        <input type="text" [(ngModel)]="selectedProduct.name" name="name" required>
+
+        <label for="price">Price:</label>
+        <input type="number" [(ngModel)]="selectedProduct.price" name="price" required>
+
+        <label for="description">Description:</label>
+        <textarea [(ngModel)]="selectedProduct.description" name="description"></textarea>
+
+        <label for="categoryQuality">Category Quality:</label>
+        <select [(ngModel)]="selectedProduct.categoryQuality" name="categoryQuality" required>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+
+        <label for="imageUrl">Image URL:</label>
+        <input type="text" [(ngModel)]="selectedProduct.imageUrl" name="imageUrl">
+
+        <button type="submit" class="uk-button uk-button-primary">Save Changes</button>
+        <button type="button" class="uk-button uk-button-secondary" (click)="cancelEdit()">Cancel</button>
+      </form>
+    </div>
+  </div>
 </div>

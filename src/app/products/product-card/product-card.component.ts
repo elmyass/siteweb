@@ -5,18 +5,18 @@ import { CartService } from '../../cart.service';
 import { isPlatformBrowser } from '@angular/common';
 import { ApiService } from '../../services/api.services.ts.service';
 
-
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.css']
 })
 export class ProductCardComponent implements AfterViewInit, OnInit {
+
+  // Define the sliderProducts array
   sliderProducts = [
     {
       imageUrl: 'https://i.pinimg.com/564x/81/56/46/815646a354574ab9135d4ae9dcbf2c5d.jpg',
       hoverText: 'Welcome to Natural Glow, where beauty meets nature.'
-    
     },
     {
       imageUrl: 'https://i.pinimg.com/564x/9e/4a/2d/9e4a2dcd1f130d97220cfcfe2d3878d7.jpg'
@@ -49,7 +49,7 @@ export class ProductCardComponent implements AfterViewInit, OnInit {
   constructor(
     private router: Router,
     private cartService: CartService,
-    private apiService: ApiService,  // Inject ApiService
+    private apiService: ApiService, 
     @Inject(PLATFORM_ID) private platformId: any
   ) {}
 
@@ -67,18 +67,22 @@ export class ProductCardComponent implements AfterViewInit, OnInit {
     this.apiService.get('http://localhost:8082/products').then(response$ => {
       response$.subscribe(products => {
         this.products = products;
-        this.filteredProducts = [...this.products]; // Initialize filtered products
+        this.filteredProducts = [...this.products]; 
       }, error => {
         console.error('Failed to load products', error);
       });
     });
   }
 
+  refreshProducts(): void {
+    this.loadProducts();
+  }
+
   startSliderLoop() {
     const sliderWrapper = document.querySelector('.slider-wrapper') as HTMLElement;
     
     if (sliderWrapper) {
-      sliderWrapper.innerHTML += sliderWrapper.innerHTML; // Clone the existing images for a loop
+      sliderWrapper.innerHTML += sliderWrapper.innerHTML; 
 
       sliderWrapper.addEventListener('animationiteration', () => {
         sliderWrapper.classList.add('no-transition');

@@ -20,4 +20,5 @@ import { AddProductComponent } from './add-product/add-product.component';
    
   ]
 })
+
 export class AdminModule { }
