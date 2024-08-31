@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { KeycloakService } from 'keycloak-angular';
-import { Observable } from 'rxjs';
+import { from, Observable, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +16,40 @@ export class ApiService {
     });
     return this.http.get(url, { headers });
   }
+// POST request
+post(url: string, body: any): Observable<any> {
+  return from(this.keycloakService.getToken()).pipe(
+    switchMap(token => {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+      return this.http.post(url, body, { headers });
+    })
+  );
+}
 
-  // You can add POST, PUT, DELETE methods here as needed
+// PUT request
+put(url: string, body: any): Observable<any> {
+  return from(this.keycloakService.getToken()).pipe(
+    switchMap(token => {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+      return this.http.put(url, body, { headers });
+    })
+  );
+}
+
+// DELETE request
+delete(url: string): Observable<any> {
+  return from(this.keycloakService.getToken()).pipe(
+    switchMap(token => {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+      return this.http.delete(url, { headers });
+    })
+  );
+}
+
 }
