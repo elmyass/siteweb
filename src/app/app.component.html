@@ -23,9 +23,9 @@
       </a>
     </div>
     <div class="cart-link">
-      <a [routerLink]="['/cart']">
+      <button (click)="toggleCart()" class="cart-toggle-btn">
         <i class="fa-solid fa-cart-shopping"></i>
-      </a>
+      </button>
     </div>
     <div class="admin-link">
       <a [routerLink]="['/admin']">
@@ -44,6 +44,30 @@
     </div>
   </div>
 </div>
+
+<!-- Sliding Cart -->
+<div class="cart-container" [class.open]="cartOpen">
+  <button (click)="toggleCart()" class="back-arrow-btn">
+    <i class="fa-solid fa-arrow-left"></i> Back
+  </button>
+  <h2>Your Shopping Cart</h2>
+  <div *ngIf="cartItems.length === 0">
+    <p>Your cart is empty.</p>
+  </div>
+  <div *ngIf="cartItems.length > 0">
+    <div class="cart-item" *ngFor="let item of cartItems">
+      <img [src]="item.imageUrl" [alt]="item.name" class="cart-item__image">
+      <div class="cart-item__details">
+        <h3>{{ item.name }}</h3>
+        <p>Quality: {{ item.categoryQuality }}</p>
+        <p>Price: {{ item.price | currency:'USD' }}</p>
+      </div>
+      <button (click)="removeFromCart(item.id)" class="btn btn-danger">Remove from Cart</button>
+    </div>
+    <button (click)="clearCart()" class="btn btn-warning">Clear Cart</button>
+  </div>
+</div>
+
 <div class="main-container">
   <router-outlet></router-outlet>
 </div>

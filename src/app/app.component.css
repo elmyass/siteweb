@@ -3,8 +3,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  background-color: #f5e6dc;
-  border-bottom: 1px solid #eaeaea;
+  background-color: #D4B895;
+  border-bottom: 1px solid #800020;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -63,4 +63,125 @@
 
 .user-menu-dropdown a:hover {
   text-decoration: underline;
+}
+
+/* Cart Container Styles */
+.cart-container {
+  position: fixed;
+  top: 0;
+  right: -100%; /* Hidden off-screen initially */
+  width: 300px;
+  height: 100%;
+  background-color: #f5e6dc;
+  padding: 20px;
+  border-radius: 8px 0 0 8px;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  transition: right 0.3s ease; /* Smooth slide-in transition */
+  overflow-y: auto; /* Scroll if content overflows */
+  z-index: 1000;
+}
+
+/* Open the cart */
+.cart-container.open {
+  right: 0; /* Slide into view */
+}
+
+/* Back Arrow Button */
+.back-arrow-btn {
+  background: none;
+  border: none;
+  color: #800020;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.back-arrow-btn i {
+  margin-right: 5px;
+}
+
+.back-arrow-btn:hover {
+  color: #660018;
+}
+
+/* Cart Item Styles */
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.cart-item__image {
+  width: 100px;
+  height: auto;
+  margin-right: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item__details {
+  flex-grow: 1;
+}
+
+.cart-item__details h3 {
+  margin: 0 0 10px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.cart-item__details p {
+  margin: 5px 0;
+  color: #555;
+}
+
+.btn {
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.btn-danger {
+  background-color: #ce5606;
+  color: white;
+  margin-left: 20px;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-warning {
+  background-color: #ce5606;
+  color: white;
+  display: block;
+  margin-top: 20px;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+/* Cart Toggle Button */
+.cart-toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  position: relative;
+  z-index: 1001;
+  color: #800020;
+}
+
+.cart-toggle-btn:hover {
+  color: #660018;
 }

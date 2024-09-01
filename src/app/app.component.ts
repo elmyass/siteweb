@@ -4,6 +4,9 @@ import { KeycloakService } from 'keycloak-angular';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CartService } from './cart.service';
+import { ProductResponse } from './products/types/product.model';
+
 
 @Component({
   selector: 'app-root',
@@ -17,14 +20,21 @@ export class AppComponent {
   userName: string = '';
   userEmail: string = '';
   isUserMenuOpen = false;
+  cartItems: ProductResponse[] = [];
+  cartOpen: boolean = false;
 
   constructor(
     private keycloakService: KeycloakService,
+    private cartService: CartService,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.initKeycloak();
     }
+  }
+
+  ngOnInit(): void {
+    this.cartItems = this.cartService.getCartItems();
   }
 
   private async initKeycloak(): Promise<void> {
@@ -48,5 +58,19 @@ export class AppComponent {
 
   toggleUserMenu(): void {
     this.isUserMenuOpen = !this.isUserMenuOpen;
+  }
+
+  toggleCart(): void {
+    this.cartOpen = !this.cartOpen;
+  }
+
+  removeFromCart(productId: number): void {
+    this.cartService.removeFromCart(productId);
+    this.cartItems = this.cartService.getCartItems(); // Refresh the cart items
+  }
+
+  clearCart(): void {
+    this.cartService.clearCart();
+    this.cartItems = [];
   }
 }
