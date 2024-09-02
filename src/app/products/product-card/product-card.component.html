@@ -1,6 +1,6 @@
+
 <!-- Slider Section -->
-<!-- Slider Section -->
-<div class="product-slider">
+ <div class="product-slider">
   <div class="slider-wrapper">
     <div class="slider-image" *ngFor="let product of sliderProducts">
       <img class="slider-img" [src]="product.imageUrl" alt="Slider Image" />
@@ -15,8 +15,6 @@
 <!-- Filter and Product Cards Section -->
 <div class="filter-section">
   <div class="filter-icon" (click)="toggleFilter()">
-
-   
     <i class="fa-solid fa-filter"></i>
   </div>
 
@@ -31,11 +29,10 @@
 <div class="product-card-container">
   <div class="product-card" *ngFor="let product of filteredProducts">
     <a [routerLink]="['/products/details', product.id]" class="product-link">
-      <img class="product-card-img" [src]="product.imageUrl" [alt]="product.name" />
-      
+      <img class="product-card-img" [src]="'data:image/png;base64,' + product.imageData" [alt]="product.name" />
       <div class="product-card-details">
         <span class="product-name">{{ product.name }}</span>
-        <span class="product-price">{{ product.price | currency:'USD' }}</span>
+        <span class="product-price">{{ product.price | currency:product.currency }}</span>
       </div>
     </a>
 

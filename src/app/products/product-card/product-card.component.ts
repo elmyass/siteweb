@@ -1,9 +1,10 @@
 import { Component, AfterViewInit, Inject, PLATFORM_ID, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ProductResponse } from '../types/product.model';
 import { CartService } from '../../cart.service';
 import { isPlatformBrowser } from '@angular/common';
 import { ApiService } from '../../services/api.services.ts.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-card',
@@ -12,7 +13,7 @@ import { ApiService } from '../../services/api.services.ts.service';
 })
 export class ProductCardComponent implements AfterViewInit, OnInit {
 
-  // Define the sliderProducts array
+
   sliderProducts = [
     {
       imageUrl: 'https://i.pinimg.com/564x/81/56/46/815646a354574ab9135d4ae9dcbf2c5d.jpg',
@@ -49,12 +50,17 @@ export class ProductCardComponent implements AfterViewInit, OnInit {
   constructor(
     private router: Router,
     private cartService: CartService,
-    private apiService: ApiService, 
+    private apiService: ApiService,
+    private route: ActivatedRoute, 
+    private sanitizer: DomSanitizer,
     @Inject(PLATFORM_ID) private platformId: any
   ) {}
 
   ngOnInit(): void {
-    this.loadProducts();
+    this.route.queryParams.subscribe(params => {
+      const query = params['q'] || '';
+      this.loadProducts(query);
+    });
   }
 
   ngAfterViewInit(): void {
@@ -63,8 +69,9 @@ export class ProductCardComponent implements AfterViewInit, OnInit {
     }
   }
 
-  loadProducts(): void {
-    this.apiService.get('http://localhost:8082/products').then(response$ => {
+  loadProducts(query: string = ''): void {
+    const apiUrl = query ? `http://localhost:8082/products/search?q=${query}` : 'http://localhost:8082/products';
+    this.apiService.get(apiUrl).then(response$ => {
       response$.subscribe(products => {
         this.products = products;
         this.filteredProducts = [...this.products]; 
@@ -72,10 +79,6 @@ export class ProductCardComponent implements AfterViewInit, OnInit {
         console.error('Failed to load products', error);
       });
     });
-  }
-
-  refreshProducts(): void {
-    this.loadProducts();
   }
 
   startSliderLoop() {
@@ -92,6 +95,11 @@ export class ProductCardComponent implements AfterViewInit, OnInit {
         });
       });
     }
+  }
+
+
+  getImageSrc(product: any) {
+      return `data:image/png;base64,${product.imageData}`
   }
 
   toggleFilter(): void {

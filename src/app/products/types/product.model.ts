@@ -18,4 +18,5 @@ export interface ProductResponse {
   categoryQuality: string;
   imageUrl: string;
   currency?: string;
+  imageData : string
 }

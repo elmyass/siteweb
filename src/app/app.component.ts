@@ -1,7 +1,7 @@
 import { Component, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { KeycloakService } from 'keycloak-angular';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartService } from './cart.service';
@@ -22,10 +22,13 @@ export class AppComponent {
   isUserMenuOpen = false;
   cartItems: ProductResponse[] = [];
   cartOpen: boolean = false;
+  searchQuery: string='';
+ 
 
   constructor(
     private keycloakService: KeycloakService,
     private cartService: CartService,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {
     if (isPlatformBrowser(this.platformId)) {
@@ -72,5 +75,10 @@ export class AppComponent {
   clearCart(): void {
     this.cartService.clearCart();
     this.cartItems = [];
+  }
+  search(): void {
+    if (this.searchQuery) {
+      this.router.navigate(['/products/card'], { queryParams: { q: this.searchQuery } });
+    }
   }
 }

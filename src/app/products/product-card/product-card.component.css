@@ -2,7 +2,6 @@
   overflow: hidden;
   background-color: white;
   width: 100vw;
-  position: 3000px;
   margin-bottom: 10px;
 }
 
@@ -65,7 +64,6 @@
   animation-play-state: paused;
 }
 
-/* Existing styles for the product cards, filter, etc. */
 .filter-section {
   display: flex;
   justify-content: flex-end;

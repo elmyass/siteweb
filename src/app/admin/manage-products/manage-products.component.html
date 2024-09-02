@@ -14,13 +14,23 @@
     </thead>
     <tbody>
       <tr *ngFor="let product of products">
+        
         <td>{{ product.id }}</td>
         <td>{{ product.name }}</td>
         <td>{{ product.price | currency }}</td>
         <td>{{ product.description }}</td>
         <td>{{ product.categoryQuality }}</td>
         <td>
-          <img [src]="product.imageUrl" alt="{{ product.name }}" width="100">
+
+
+
+      
+          <img class="product-card-img" [src]="'data:image/png;base64,' + product.imageData" [alt]="product.name" />
+        
+        
+        
+        
+        
         </td>
         <td>
           <button class="uk-button uk-button-default" (click)="onUpdate(product)">Update</button>

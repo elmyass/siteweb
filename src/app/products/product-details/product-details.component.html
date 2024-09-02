@@ -1,7 +1,7 @@
 <div class="product-card" *ngIf="product">
     <div class="product-content">
       <div class="product-tumb">
-        <img [src]="product.imageUrl" alt="{{ product.name }}">
+        <img class="product-card-img" [src]="'data:image/png;base64,' + product.imageData" [alt]="product.name" />
       </div>
       <div class="product-details">
         <h4>{{ product.name }}</h4>
